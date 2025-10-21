@@ -1,18 +1,71 @@
-# React + Vite
+# DevKonnect
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**DevKonnect** is a developer networking platform designed to help developers connect, collaborate, and share ideas. It allows users to create and update their profiles, explore a developer feed, and send or receive connection requests in a simple and efficient way.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- **User Authentication**
+  - Create an account
+  - Login (if already registered)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- **Profile Management**
+  - Create or update your profile
 
-Note: This will impact Vite dev & build performances.
+- **Networking**
+  - Feed Page / Explore Page
+  - Send or reject connection requests
+  - View received connection requests
+  - View sent connection requests
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Planning
+
+DevKonnect is designed using a **microservices-based architecture**:
+
+- **Backend Service** – Handles APIs, authentication, and database operations
+- **Frontend Service** – User-facing React-based web application
+
+---
+
+## ⚙️ Backend Tech Stack
+
+- **Node.js** – Server-side JavaScript runtime
+- **Express.js** – Web framework for building APIs
+- **MongoDB** – NoSQL database for scalable data storage
+
+---
+
+## 🎨 Frontend Tech Stack
+
+- **React.js** – Frontend library for building interactive UIs
+- **Tailwind CSS** *(optional but recommended)* – Utility-first CSS for styling
+
+---
+
+## 📂 Project Structure (Planned)
+
+```
+DevKonnect/
+│
+├── backend/          # Node.js + Express + MongoDB APIs
+│   ├── src/
+│   └── package.json
+│
+├── frontend/         # React + Tailwind app
+│   ├── src/
+│   └── package.json
+│
+└── README.md
+```
+
+---
+
+## 🔮 Future Enhancements
+
+- Real-time chat between connected developers
+- Multi-language support
+- Personalized feed based on interests/skills
+- Notifications for connection requests and activity

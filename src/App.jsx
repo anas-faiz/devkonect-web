@@ -1,35 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+    <div className="flex flex-col items-center justify-center h-screen w-full bg-gradient-to-br from-amber-100 via-orange-200 to-amber-300 text-gray-800">
+      <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl p-10 text-center border border-white/30 transition-all hover:scale-105 hover:shadow-amber-400/40 duration-300">
+        <h1 className="text-5xl font-extrabold text-amber-800 mb-4">
+          Hey!!! <span className="text-red-600 drop-shadow-sm">DevKonnect</span>{" "}
+          Users!!!
+        </h1>
+        <p className="text-lg text-gray-700 font-medium tracking-wide">
+          Welcome to the community that connects developers worldwide 🌍
         </p>
+        <button className="mt-6 bg-amber-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-amber-600 hover:shadow-lg transition-all duration-300">
+          Get Started
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
