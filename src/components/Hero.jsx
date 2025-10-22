@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-    <section className="flex flex-col items-center justify-center text-center p-10 bg-gradient-to-br from-amber-50 via-white/70 to-amber-100 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/40 transition-transform duration-300 hover:scale-[1.03] hover:shadow-amber-400/40 mx-auto my-12">
+    <section className="flex flex-col items-center justify-center text-center p-10 bg-linear-to-br from-amber-50 via-white/70 to-amber-100 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/40 transition-transform duration-300 hover:scale-[1.03] hover:shadow-amber-400/40 mx-auto my-12">
       {/* Title */}
       <h1 className="text4xl sm:text-5xl md:text-6xl font-extrabold text-amber-800 mb-4 leading-tight">
         Hey!!!
