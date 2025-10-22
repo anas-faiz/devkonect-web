@@ -1,6 +1,10 @@
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-full bg-gradient-to-br from-amber-800 via-red-200 to-amber-600 text-gray-800">
+    <div className="flex flex-col items-center justify-center h-screen w-full ">
+      <Navbar/>
       <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl p-10 text-center border border-white/30 transition-all hover:scale-105 hover:shadow-amber-400/40 duration-300">
         <h1 className="text-5xl font-extrabold text-amber-800 mb-4">
           Hey!!! <span className="text-red-600 drop-shadow-sm">DevKonnect</span>{" "}
@@ -13,6 +17,7 @@ function App() {
           Get Started
         </button>
       </div>
+      <Footer/>
     </div>
   );
 }
