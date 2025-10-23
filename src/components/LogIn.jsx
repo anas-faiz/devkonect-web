@@ -1,9 +1,9 @@
-const SignUp = () => {
+const LogIn = () => {
   return (
     <div className="card bg-primary text-primary-content w-96">
       <div className="card-body">
-        <h2 className="card-title flex justify-center">Sign Up</h2>
-        <label className="input validator">
+        <h2 className="card-title flex justify-items-start mb-2">Log In</h2>
+        <label className="input validator mb-2">
           <svg
             className="h-[1em] opacity-50"
             xmlns="http://www.w3.org/2000/svg"
@@ -22,8 +22,8 @@ const SignUp = () => {
           </svg>
           <input type="email" placeholder="mail@site.com" required />
         </label>
-        <div className="validator-hint hidden">Enter valid email address</div>
-        <label className="input validator">
+        {/* <div className="validator-hint hidden mb-2">Enter valid email address</div> */}
+        <label className="input validator mb-2">
           <svg
             className="h-[1em] opacity-50"
             xmlns="http://www.w3.org/2000/svg"
@@ -49,19 +49,19 @@ const SignUp = () => {
             title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
           />
         </label>
-        <p className="validator-hint hidden">
+        {/* <p className="validator-hint hidden">
           Must be more than 8 characters, including
           <br />
           At least one number <br />
           At least one lowercase letter <br />
           At least one uppercase letter
-        </p>
-        <div className="card-actions justify-center">
-          <button className="btn ">SignUp</button>
+        </p> */}
+        <div className="card-actions justify-end mr-4">
+          <button className="btn ">Log In</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default LogIn;
