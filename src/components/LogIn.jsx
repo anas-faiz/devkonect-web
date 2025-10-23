@@ -1,5 +1,23 @@
+import axios from "axios";
+import { useState } from "react";
+
 const LogIn = () => {
-  return (
+
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
+
+    const handleLogin = async ()=>{
+      try {
+        const res = await axios.post("http://localhost:4000/login", {
+        email: email,
+        password: password
+      })
+      console.log(res)  
+      } catch (error) {
+        console.log(error)
+      }      
+    }
+    return (
     <div className="card bg-primary text-primary-content w-96">
       <div className="card-body">
         <h2 className="card-title flex justify-items-start mb-2">Log In</h2>
@@ -20,7 +38,7 @@ const LogIn = () => {
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
             </g>
           </svg>
-          <input type="email" placeholder="mail@site.com" required />
+          <input type="email" placeholder="mail@site.com" value={email} onChange={(e)=>setEmail(e.target.value)} required />
         </label>
         {/* <div className="validator-hint hidden mb-2">Enter valid email address</div> */}
         <label className="input validator mb-2">
@@ -47,6 +65,8 @@ const LogIn = () => {
             minlength="8"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+            value={password}
+            onChange={(e)=>setPassword(e.target.value)}
           />
         </label>
         {/* <p className="validator-hint hidden">
@@ -57,7 +77,7 @@ const LogIn = () => {
           At least one uppercase letter
         </p> */}
         <div className="card-actions justify-end mr-4">
-          <button className="btn ">Log In</button>
+          <button onClick={handleLogin} className="btn">Log In</button>
         </div>
       </div>
     </div>
