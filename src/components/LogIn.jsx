@@ -2,82 +2,88 @@ import axios from "axios";
 import { useState } from "react";
 
 const LogIn = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ type: "", text: "" });
 
-    const [email,setEmail] = useState("");
-    const [password,setPassword] = useState("");
-
-    const handleLogin = async ()=>{
-      try {
-        const res = await axios.post("http://localhost:4000/login", {
-        email: email,
-        password: password
-      })
-      console.log(res)  
-      } catch (error) {
-        console.log(error)
-      }      
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      setMessage({ type: "error", text: "Please fill in all fields." });
+      return;
     }
-    return (
-    <div className="card bg-primary text-primary-content w-96">
-      <div className="card-body">
-        <h2 className="card-title flex justify-items-start mb-2">Log In</h2>
-        <label className="input validator mb-2">
-          <svg
-            className="h-[1em] opacity-50"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <g
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth="2.5"
-              fill="none"
-              stroke="currentColor"
+
+    try {
+      setLoading(true);
+      setMessage({ type: "", text: "" });
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/login`,
+        { email, password},
+        { withCredentials: true }
+      );
+
+      setMessage({ type: "success", text: "Login successful!" });
+
+      // optionally redirect or save user info here
+    } catch (error) {
+      const errMsg =
+        error.response?.data?.message || "Invalid credentials. Try again.";
+      setMessage({ type: "error", text: errMsg });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex justify-center items-center bg-linear-to-br from-slate-900 to-slate-700">
+      <div className="card w-96 bg-base-200 shadow-2xl">
+        <div className="card-body">
+          <h2 className="card-title text-2xl font-semibold mb-4 text-center">
+            Log In
+          </h2>
+
+          <form onSubmit={handleLogin} className="flex flex-col gap-3">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="input input-bordered w-full"
+              required
+            />
+
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              minLength={8}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input input-bordered w-full"
+              required
+            />
+
+            {message.text && (
+              <p
+                className={`text-sm ${
+                  message.type === "error" ? "text-red-500" : "text-green-500"
+                }`}
+              >
+                {message.text}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className={`btn btn-primary w-full mt-2 ${
+                loading ? "opacity-70 cursor-not-allowed" : ""
+              }`}
             >
-              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-            </g>
-          </svg>
-          <input type="email" placeholder="mail@site.com" value={email} onChange={(e)=>setEmail(e.target.value)} required />
-        </label>
-        {/* <div className="validator-hint hidden mb-2">Enter valid email address</div> */}
-        <label className="input validator mb-2">
-          <svg
-            className="h-[1em] opacity-50"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <g
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth="2.5"
-              fill="none"
-              stroke="currentColor"
-            >
-              <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path>
-              <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
-            </g>
-          </svg>
-          <input
-            type="password"
-            required
-            placeholder="Password"
-            minlength="8"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
-            value={password}
-            onChange={(e)=>setPassword(e.target.value)}
-          />
-        </label>
-        {/* <p className="validator-hint hidden">
-          Must be more than 8 characters, including
-          <br />
-          At least one number <br />
-          At least one lowercase letter <br />
-          At least one uppercase letter
-        </p> */}
-        <div className="card-actions justify-end mr-4">
-          <button onClick={handleLogin} className="btn">Log In</button>
+              {loading ? "Logging in..." : "Log In"}
+            </button>
+          </form>
         </div>
       </div>
     </div>
