@@ -20,7 +20,7 @@ const LogIn = () => {
 
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/login`,
-        { email, password},
+        { email, password },
         { withCredentials: true }
       );
 
