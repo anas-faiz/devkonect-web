@@ -1,8 +1,20 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { removeUser } from "../utils/userSlice";
 
 const Navbar = () => {
-  const user = useSelector( state=> state.user);
+  let user = useSelector( state=> state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const handleLogout = ()=>{
+    try{
+      dispatch(removeUser());
+      navigate("/login");
+    }catch(err){
+       console.log(err.message);
+    }
+  }
   return (
     <nav className="navbar bg-base-300 shadow-sm fixed top-0 z-50 px-4">
       {/* Left Section */}
@@ -39,7 +51,7 @@ const Navbar = () => {
               </a>
             </li>
             <li><a>Settings</a></li>
-            <li><a className="text-error hover:bg-error/10">Logout</a></li>
+            <li><a onClick={handleLogout} className="text-error hover:bg-error/10">Logout</a></li>
           </ul>
         </div>
       </div>}
