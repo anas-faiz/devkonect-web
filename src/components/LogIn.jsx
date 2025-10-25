@@ -33,7 +33,7 @@ const LogIn = () => {
 
       setMessage({ type: "success", text: "Login successful!" });
 
-      navigate("/");
+      navigate("/feed");
       // optionally redirect or save user info here
     } catch (error) {
       const errMsg =
