@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { adduser } from "../utils/appSlice";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
   const [email, setEmail] = useState("anasfaiz0811@gmail.com");
@@ -9,6 +10,7 @@ const LogIn = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -31,6 +33,7 @@ const LogIn = () => {
 
       setMessage({ type: "success", text: "Login successful!" });
 
+      navigate("/");
       // optionally redirect or save user info here
     } catch (error) {
       const errMsg =
