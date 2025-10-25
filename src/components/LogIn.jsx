@@ -31,7 +31,7 @@ const LogIn = () => {
       
       setMessage({ type: "success", text: "Login successful!" });
 
-      // optionally redirect or save user info here
+      //redirect or save user info here
       dispatch(adduser(response?.data?.data));
       
       navigate("/feed");

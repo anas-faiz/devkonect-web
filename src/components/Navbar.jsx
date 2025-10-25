@@ -1,16 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { removeUser } from "../utils/userSlice";
+import axios from "axios";
 
 const Navbar = () => {
   let user = useSelector( state=> state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = ()=>{
+  const handleLogout = async ()=>{
     try{
-      dispatch(removeUser());
-      navigate("/login");
+     const res =  await axios.post(`${import.meta.env.VITE_API_URL}/logout`
+      ,{},{
+      withCredintials:true
+     });
+      console.log(res) 
+     dispatch(removeUser());
+      navigate("/login",{replace: true});
     }catch(err){
        console.log(err.message);
     }
@@ -19,12 +25,12 @@ const Navbar = () => {
     <nav className="navbar bg-base-300 shadow-sm fixed top-0 z-50 px-4">
       {/* Left Section */}
       <div className="flex-1">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="btn btn-ghost normal-case text-2xl font-semibold text-primary"
         >
           DevKonect
-        </a>
+        </Link>
       </div>
 
       {/* Right Section */}
@@ -46,12 +52,12 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a className="justify-between">
+              <Link to={"/profile"} className="justify-between">
                 Profile <span className="badge badge-primary">New</span>
-              </a>
+              </Link>
             </li>
             <li><a>Settings</a></li>
-            <li><a onClick={handleLogout} className="text-error hover:bg-error/10">Logout</a></li>
+            <li><Link onClick={handleLogout} className="text-error hover:bg-error/10">Logout</Link></li>
           </ul>
         </div>
       </div>}
