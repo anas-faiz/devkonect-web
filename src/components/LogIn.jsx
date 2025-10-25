@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { adduser } from "../utils/appSlice";
 
 const LogIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("anasfaiz0811@gmail.com");
+  const [password, setPassword] = useState("Anas@0811");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
+  const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,6 +26,8 @@ const LogIn = () => {
         { email, password },
         { withCredentials: true }
       );
+
+      dispatch(adduser(response?.data?.data));
 
       setMessage({ type: "success", text: "Login successful!" });
 
