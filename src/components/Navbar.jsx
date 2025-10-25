@@ -1,9 +1,7 @@
+import { useSelector } from "react-redux";
+
 const Navbar = () => {
-  const user = {
-    name: "Anas",
-    avatar:
-      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
-  };
+  const user = useSelector( state=> state.user);
 
   return (
     <nav className="navbar bg-base-300 shadow-sm fixed top-0 z-50 px-4">
@@ -18,7 +16,8 @@ const Navbar = () => {
       </div>
 
       {/* Right Section */}
-      <div className="flex items-center gap-2">
+      {user && <div className="flex items-center gap-2">
+        <p className="p-4 cursor-pointer">welcome, <span className="text-lg uppercase font-bold text-primary">{user.firstName}</span></p>
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
@@ -26,7 +25,7 @@ const Navbar = () => {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <img src={user.avatar} alt={`${user.name}'s avatar`} />
+              <img src={user.photoUrl} alt={`${user.name}'s avatar`} />
             </div>
           </div>
 
@@ -43,7 +42,7 @@ const Navbar = () => {
             <li><a className="text-error hover:bg-error/10">Logout</a></li>
           </ul>
         </div>
-      </div>
+      </div>}
     </nav>
   );
 };
