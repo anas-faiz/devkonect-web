@@ -4,23 +4,26 @@ import { removeUser } from "../utils/userSlice";
 import axios from "axios";
 
 const Navbar = () => {
-  let user = useSelector( state=> state.user);
+  let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = async ()=>{
-    try{
-     const res =  await axios.post(`${import.meta.env.VITE_API_URL}/logout`
-      ,{},{
-      withCredintials:true
-     });
-      console.log(res) 
-     dispatch(removeUser());
-      navigate("/login",{replace: true});
-    }catch(err){
-       console.log(err.message);
+  const handleLogout = async () => {
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/logout`,
+        {},
+        {
+          withCredintials: true,
+        }
+      );
+      console.log(res);
+      dispatch(removeUser());
+      navigate("/login", { replace: true });
+    } catch (err) {
+      console.log(err.message);
     }
-  }
+  };
   return (
     <nav className="navbar bg-base-300 shadow-sm fixed top-0 z-50 px-4">
       {/* Left Section */}
@@ -34,33 +37,49 @@ const Navbar = () => {
       </div>
 
       {/* Right Section */}
-      {user && <div className="flex items-center gap-2">
-        <p className="p-4 cursor-pointer">welcome, <span className="text-lg uppercase font-bold text-primary">{user.firstName}</span></p>
-        <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <img src={user.photoUrl} alt={`${user.name}'s avatar`} />
+      {user && (
+        <div className="flex items-center gap-2">
+          <p className="p-4 cursor-pointer">
+            welcome,{" "}
+            <span className="text-lg uppercase font-bold text-primary">
+              {user.firstName}
+            </span>
+          </p>
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <img src={user.photoUrl} alt={`${user.name}'s avatar`} />
+              </div>
             </div>
-          </div>
 
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <Link to={"/profile"} className="justify-between">
-                Profile <span className="badge badge-primary">New</span>
-              </Link>
-            </li>
-            <li><a>Settings</a></li>
-            <li><Link onClick={handleLogout} className="text-error hover:bg-error/10">Logout</Link></li>
-          </ul>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            >
+              <li>
+                <Link to={"/profile"} className="justify-between">
+                  Profile <span className="badge badge-primary">New</span>
+                </Link>
+              </li>
+              <li>
+                <a>Settings</a>
+              </li>
+              <li>
+                <Link
+                  onClick={handleLogout}
+                  className="text-error hover:bg-error/10"
+                >
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>}
+      )}
     </nav>
   );
 };
