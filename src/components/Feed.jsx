@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import Card from "./Card";
 import axios from "axios";
 import { addFeed } from "../utils/feedSlice"
 import { useEffect } from "react";
+import FeedCard from "./FeedCard";
 
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
@@ -27,7 +27,7 @@ const Feed = () => {
   }
   return (
     <div className="flex items-center justify-center">
-      <Card feed={feed[3]} />
+      <FeedCard feed={feed[3]} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-const Card = ({ feed }) => {
+const FeedCard = ({ feed }) => {
   return (
     <div className="card bg-white/80 backdrop-blur-md w-96 shadow-xl hover:shadow-amber-400/30 transition-all duration-300 border border-white/20 rounded-2xl overflow-hidden max-h-7/12">
       {/* Profile Image */}
@@ -53,4 +53,4 @@ const Card = ({ feed }) => {
   );
 };
 
-export default Card;
+export default FeedCard;
