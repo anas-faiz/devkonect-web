@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import Card from "./Card";
+import ProfileCard from "./ProfileCard";
 
 const Profile = () => {
   const user = useSelector((state) => state.user);
@@ -15,7 +16,7 @@ const Profile = () => {
 
   return (
     <div className="flex items-center justify-center">
-      
+      <ProfileCard user= {user}/>
     </div>
   );
 };
