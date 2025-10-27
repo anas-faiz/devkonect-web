@@ -126,7 +126,7 @@ const handleSave = async () => {
             </select>
           </div>
         ) : (
-          <p className="text-gray-600 text-sm font-medium">
+          <p className=" text-sm font-medium">
             {form.age && `${form.age} years old`} {form.gender && `• ${form.gender}`}
           </p>
         )}
@@ -141,7 +141,7 @@ const handleSave = async () => {
             className="textarea textarea-bordered w-full"
           />
         ) : (
-          <p className="text-gray-700 italic text-sm leading-relaxed">
+          <p className="italic text-sm leading-relaxed">
             {form.about || "No bio available yet."}
           </p>
         )}

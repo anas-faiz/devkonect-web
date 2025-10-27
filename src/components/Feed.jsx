@@ -27,7 +27,7 @@ const Feed = () => {
   }
   return (
     <div className="flex items-center justify-center">
-      <Card feed={feed} />
+      <Card feed={feed[0]} />
     </div>
   );
 };
