@@ -7,6 +7,7 @@ const Navbar = () => {
   let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userData = useSelector((store)=>store.user)
 
   const handleLogout = async () => {
     try {
@@ -14,7 +15,7 @@ const Navbar = () => {
         `${import.meta.env.VITE_API_URL}/logout`,
         {},
         {
-          withCredintials: true,
+          withCredentials: true,
         }
       );
       console.log(res);
@@ -29,7 +30,7 @@ const Navbar = () => {
       {/* Left Section */}
       <div className="flex-1">
         <Link
-          to="/"
+          to={userData ? "/feed" : "/"}
           className="btn btn-ghost normal-case text-2xl font-semibold text-primary"
         >
           DevKonect

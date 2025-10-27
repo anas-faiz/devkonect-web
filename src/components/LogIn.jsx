@@ -32,10 +32,8 @@ const LogIn = () => {
       setMessage({ type: "success", text: "Login successful!" });
 
       //redirect or save user info here
-      dispatch(adduser(response?.data?.data));
-      
+      dispatch(adduser(response?.data?.data));      
       navigate("/feed");
-
     } catch (error) {
       const errMsg =
         error.response?.data?.message || "Invalid credentials. Try again.";
