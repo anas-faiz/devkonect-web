@@ -1,10 +1,8 @@
-import React from "react";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footer bg-neutral text-neutral-content p-4 sm:footer-horizontal flex flex-wrap justify-between items-center fixed bottom-0 w-full shadow-inner z-40">
+    <footer className="footer bg-neutral text-neutral-content p-4 sm:footer-horizontal flex flex-wrap justify-between items-center fixed bottom-0">
       {/* Left Section */}
       <div className="flex items-center gap-2">
         <svg
