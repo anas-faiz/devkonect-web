@@ -1,7 +1,11 @@
+import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { adduser } from "../utils/userSlice";
 
 const EditProfileCard = ({ user, onSave }) => {
   const { firstName, lastName, age, gender, about, photoUrl, skills = [] } = user || {};
+    const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     firstName: firstName || "",
@@ -33,11 +37,31 @@ const EditProfileCard = ({ user, onSave }) => {
       skills: form.skills.filter((s) => s !== skill),
     });
   };
+const handleSave = async () => {
+  try {
+    const res = await axios.patch(
+      `${import.meta.env.VITE_API_URL}/profile/edit`,
+      {
+        firstName: form.firstName,
+        lastName: form.lastName,
+        skills: form.skills,
+        about: form.about,
+        age: form.age,
+        gender: form.gender,
+      },
+      { withCredentials: true }
+    );
 
-  const handleSave = () => {
+    dispatch(adduser(res.data));
     if (onSave) onSave(form);
     setIsEditing(false);
-  };
+    alert("Profile updated successfully!");
+  } catch (err) {
+    console.error(err);
+    alert("Failed to update profile.");
+  }
+};
+
 
   return (
     <div className="card lg:card-side bg-white/10 backdrop-blur-md shadow-lg hover:shadow-amber-400/40 transition-all duration-300 border border-white/20 rounded-2xl overflow-hidden max-w-4xl mx-auto p-6">
