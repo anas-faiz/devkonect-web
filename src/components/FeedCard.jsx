@@ -1,4 +1,13 @@
+import axios from "axios";
+
 const FeedCard = ({ feed }) => {
+
+  const handlePass = async ()=>{
+    const res = await axios.post("`${import.meta.env.VITE_API_URL}/http://localhost:4000/request/send/rejcted/`",{withCredentials:true})
+    
+  }
+  
+
   return (
     <div className="card bg-white/80 backdrop-blur-md w-80 shadow-xl hover:shadow-amber-400/30 transition-all duration-300 border border-white/20 rounded-2xl overflow-hidden">
       {/* Profile Image */}
@@ -43,7 +52,7 @@ const FeedCard = ({ feed }) => {
           </div>
 
           <div className="flex justify-center gap-4">
-            <button className="px-6 py-2 rounded-xl border border-gray-400 text-gray-700 font-semibold uppercase tracking-wide hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all duration-200">
+            <button onClick={handlePass} className="px-6 py-2 rounded-xl border border-gray-400 text-gray-700 font-semibold uppercase tracking-wide hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all duration-200">
               Pass
             </button>
             <button className="px-6 py-2 rounded-xl border border-black text-white font-bold uppercase tracking-wide bg-gradient-to-r from-amber-400 to-red-500 hover:from-red-500 hover:to-amber-400 hover:scale-105 active:scale-95 shadow-md transition-all duration-200">
