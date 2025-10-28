@@ -15,6 +15,7 @@ const Feed = () => {
         useEffect(()=>{
             getFeed()
         },[])
+        console.log(feed)
   if (!feed) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -27,7 +28,7 @@ const Feed = () => {
   }
   return (
     <div className="flex items-center justify-center">
-      <FeedCard feed={feed[3]} />
+      <FeedCard feed={feed[0]} />
     </div>
   );
 };

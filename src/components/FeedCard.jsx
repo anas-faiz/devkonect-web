@@ -3,11 +3,12 @@ import axios from "axios";
 const FeedCard = ({ feed }) => {
 
   const handlePass = async ()=>{
-    const res = await axios.post(`${import.meta.env.VITE_API_URL}/request/send/rejcted/${feed.data._id}`,{},{withCredentials:true})
-    
+    const res = await axios.post(`${import.meta.env.VITE_API_URL}/request/send/rejcted/${feed[0]._id}`,{},{withCredentials:true})
+    console.log(res); 
   }
   const handleSmash = async ()=>{
-    const res = await axios.post(`${import.meta.env.VITE_API_URL}/request/send/interested/${feed.data._id}`,{},{withCredentials:true})
+    const res = await axios.post(`${import.meta.env.VITE_API_URL}/request/send/interested/${feed[0]._id}`,{},{withCredentials:true})
+    console.log(res);
   }
   
 

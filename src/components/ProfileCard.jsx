@@ -27,7 +27,7 @@ const EditProfileCard = ({ user, onSave }) => {
   const [newSkill, setNewSkill] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [toast, setToast] = useState(false);
-
+  const [error,setError] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
@@ -70,7 +70,10 @@ const EditProfileCard = ({ user, onSave }) => {
       }, 3000);
     } catch (err) {
       console.error(err);
-      alert("Failed to update profile.");
+      setError(true);
+      setTimeout(()=>{
+        setError(false)
+      },[3000])
     }
   };
 
@@ -241,7 +244,12 @@ const EditProfileCard = ({ user, onSave }) => {
             <span>Profile Updated successfully.</span>
           </div>
         </div>}
-      
+        {error && <div className="toast toast-top toast-end fixed top-20">
+          <div className="alert alert-fail">
+            <span>failed to update Profile</span>
+          </div>
+        </div>}
+          
     </>
   );
 };
