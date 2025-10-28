@@ -113,7 +113,7 @@ const handleSave = async () => {
               placeholder="Age"
               className="input input-bordered w-full"
             />
-            <select
+            {!form.gender && (<select
               name="gender"
               value={form.gender}
               onChange={handleChange}
@@ -123,7 +123,7 @@ const handleSave = async () => {
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Other">Other</option>
-            </select>
+            </select>)}
           </div>
         ) : (
           <p className=" text-sm font-medium">
