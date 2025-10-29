@@ -2,27 +2,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { removeUser } from "../utils/userSlice";
 import axios from "axios";
+import { useState } from "react";
 
 const Navbar = () => {
   let user = useSelector((state) => state.user);
+  const [error,setError] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((store)=>store.user)
 
   const handleLogout = async () => {
     try {
-      const res = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_API_URL}/logout`,
         {},
         {
           withCredentials: true,
         }
       );
-      console.log(res);
+      
       dispatch(removeUser());
       navigate("/login", { replace: true });
     } catch (err) {
-      console.log(err.message);
+      console.log("Error" + err.response.data)
+      setError(true)
     }
   };
   return (
