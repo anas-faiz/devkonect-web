@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Links, useNavigate } from "react-router-dom";
 import { removeUser } from "../utils/userSlice";
 import axios from "axios";
 import { useState } from "react";
@@ -70,7 +70,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to={"/connections"} >Connetions</Link>
               </li>
               <li>
                 <Link

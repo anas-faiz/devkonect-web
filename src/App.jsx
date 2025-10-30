@@ -9,6 +9,7 @@ import Profile from "./components/Profile";
 import { adduser } from "./utils/userSlice";
 import axios from "axios";
 import { useEffect } from "react";
+import Connections from "./components/Connections";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function App() {
         <Route path="/login" element={<LogIn/>} />
         <Route path="/feed" element={<Feed/>}/>
         <Route path="/profile" element={<Profile/>}/>
+        <Route path="/connections" element={<Connections/>}/>
       </Routes>
       <Footer/>
     </div>
