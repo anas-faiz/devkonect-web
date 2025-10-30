@@ -6,10 +6,11 @@ import { useState } from "react";
 
 const Navbar = () => {
   let user = useSelector((state) => state.user);
-  const [error,setError] = useState(false);
+  let request = useSelector((state) => state.request);
+  const [error, setError] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userData = useSelector((store)=>store.user)
+  const userData = useSelector((store) => store.user);
 
   const handleLogout = async () => {
     try {
@@ -20,12 +21,12 @@ const Navbar = () => {
           withCredentials: true,
         }
       );
-      
+
       dispatch(removeUser());
       navigate("/login", { replace: true });
     } catch (err) {
-      console.log("Error" + err.response.data)
-      setError(true)
+      console.log("Error" + err.response.data);
+      setError(true);
     }
   };
   return (
@@ -43,7 +44,18 @@ const Navbar = () => {
       {/* Right Section */}
       {user && (
         <div className="flex items-center gap-2">
-          <div className="badge badge-outline badge-primary"><Link to={"/request"}>Requests</Link></div>
+          <div className="relative inline-block">
+            <div className="badge badge-outline badge-primary px-4 py-2">
+              <Link to="/request">Requests</Link>
+            </div>
+
+            {request.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-rose-500 text-white text-xs font-semibold rounded-full px-2 py-0.5 shadow-md">
+                {request.length}
+              </span>
+            )}
+          </div>
+
           <p className="p-4 cursor-pointer">
             welcome,{" "}
             <span className="text-lg uppercase font-bold text-primary">
@@ -71,7 +83,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to={"/connections"} >Connetions</Link>
+                <Link to={"/connections"}>Connetions</Link>
               </li>
               <li>
                 <Link
