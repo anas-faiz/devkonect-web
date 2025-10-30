@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnection } from "../utils/connetionSlice";
 import axios from "axios";
@@ -6,7 +6,8 @@ import axios from "axios";
 const Connections = () => {
   const connections = useSelector((store) => store.connection);
   const dispatch = useDispatch();
-
+  const [error,setError] = useState(false);
+  
   const getConnections = async () => {
     try {
       const res = await axios.get(
@@ -16,6 +17,7 @@ const Connections = () => {
       dispatch(addConnection(res.data.data));
     } catch (error) {
       console.log(error);
+      setError(true)
     }
   };
 
@@ -51,12 +53,12 @@ const Connections = () => {
 
   return (
     <div className="max-w-2xl mx-auto mt-10 bg-white/80 backdrop-blur-md shadow-lg rounded-2xl border border-white/20 p-4">
-      <h1 className="text-xl font-bold text-amber-600 mb-4 tracking-wide">
+      <h1 className="text-xl font-bold text-primary mb-4 tracking-wide">
         Connections ({connections.length})
       </h1>
 
       <ul className="flex flex-col divide-y divide-gray-200">
-        {connections.map((connection, index) => (
+        {connections.map((connection) => (
           <li
             key={connection._id}
             className="flex items-center justify-between py-3 px-2 hover:bg-amber-50/60 transition-all rounded-xl"
@@ -64,11 +66,9 @@ const Connections = () => {
             {/* Left Section */}
             <div className="flex items-center gap-4">
               <img
-                src={
-                  connection.photoUrl || "https://via.placeholder.com/80x80"
-                }
+                src={connection.photoUrl || "https://via.placeholder.com/80x80"}
                 alt={connection.firstName}
-                className="w-14 h-14 rounded-full object-cover border-2 border-amber-300 shadow-sm"
+                className="w-14 h-14 rounded-full object-cover border-2 border-blue-300 shadow-sm"
               />
               <div>
                 <h2 className="font-semibold text-gray-800 text-lg capitalize">
@@ -76,14 +76,14 @@ const Connections = () => {
                 </h2>
                 <p className="text-sm text-gray-500">
                   {connection.gender || "User"} •{" "}
-                  {connection.age ? `${connection.age} yrs` : "Age N/A"}
+                  {connection.age ? `${connection.age}` : "Age N/A"}
                 </p>
               </div>
             </div>
 
             {/* Right Section */}
             <div className="flex items-center gap-2">
-              <button className="text-amber-600 font-medium border border-amber-400 px-3 py-1 rounded-xl hover:bg-amber-400 hover:text-white transition-all duration-200">
+              <button className="text-primary font-medium border border-blue-400 px-3 py-1 rounded-xl hover:bg-rose-400 hover:text-white transition-all duration-200">
                 Message
               </button>
               <button className="text-gray-600 hover:text-red-500 transition-all duration-200">
