@@ -28,9 +28,9 @@ const Feed = () => {
   return (
     <div className="flex items-center justify-center">
       {
-        feed.map((user)=>{
+        feed.map((user)=>(
           <FeedCard key={user._id} feed={user}/>
-        })
+        ))
       }        
     </div>
   );
