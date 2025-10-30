@@ -43,7 +43,7 @@ const Navbar = () => {
       {/* Right Section */}
       {user && (
         <div className="flex items-center gap-2">
-          <div className="badge badge-outline badge-primary"><Link>Request</Link></div>
+          <div className="badge badge-outline badge-primary"><Link to={"/request"}>Requests</Link></div>
           <p className="p-4 cursor-pointer">
             welcome,{" "}
             <span className="text-lg uppercase font-bold text-primary">
