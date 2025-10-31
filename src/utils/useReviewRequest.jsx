@@ -1,21 +1,27 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { removeRequest } from "./requestSlice";
+import { removeRequest } from "../utils/requestSlice";
 
-const useReviewRequest = async (status,_id)=>{
+const useReviewRequest = () => {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-
+  // return a function that can be called from a component
+  const reviewRequest = async (status, _id) => {
     try {
-        const res = await axios.post(`${import.meta.env.VITE_API_URL}/request/review/${status/_id}`,{},{withCredentials:true});
-        dispatch(removeRequest())
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/request/review/${status}/${_id}`,
+        {},
+        { withCredentials: true }
+      );
 
+      // Update Redux state after successful API call
+      dispatch(removeRequest(_id));
     } catch (error) {
-        console.log(error)
+      console.error("Error reviewing request:", error);
     }
+  };
 
-
-    return
-}
+  return reviewRequest;
+};
 
 export default useReviewRequest;
