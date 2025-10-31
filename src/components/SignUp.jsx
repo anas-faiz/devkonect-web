@@ -37,7 +37,7 @@ const SignUp = () => {
 
       // Save user info & redirect
       dispatch(adduser(response?.data?.data));
-      navigate("/feed");
+      navigate("/profile");
     } catch (error) {
       const errMsg =
         error.response?.data?.message ||
