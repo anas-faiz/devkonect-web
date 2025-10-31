@@ -1,12 +1,14 @@
 import { useSelector } from "react-redux";
+import useReviewRequest from "../utils/useReviewRequest";
 
-const ConnectionCard = ({ data }) => {
+const ConnectionCard = ({ data ,requestId}) => {
   const connections = useSelector((store) => store.connection);
+  const reviewRequest = useReviewRequest(); // ✅ call hook here
 
-  // Check if this user is already in the connection list
-  const isConnected = connections?.some(
-    (conn) => conn._id === data._id
-  );
+  const isConnected = connections?.some((conn) => conn._id === data._id);
+  
+  const handleAccept = () => reviewRequest("accepted", requestId);
+  const handleReject = () => reviewRequest("rejected", requestId);
 
   return (
     <li
@@ -32,26 +34,39 @@ const ConnectionCard = ({ data }) => {
 
       {/* Right Section */}
       <div className="flex items-center gap-2">
-        <button className="text-primary font-medium border border-blue-400 px-3 py-1 rounded-xl hover:bg-rose-400 hover:text-white transition-all duration-200">
-          {isConnected ? "Message" : "Accept"}
-        </button>
-
-        <button className="text-gray-600 hover:text-red-500 transition-all duration-200">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+        {!isConnected ? (
+          <>
+            <button
+              onClick={handleAccept}
+              className="text-primary font-medium border border-blue-400 px-3 py-1 rounded-xl hover:bg-blue-400 hover:text-white transition-all duration-200"
+            >
+              Accept
+            </button>
+            <button
+              onClick={handleReject}
+              className="text-gray-600 hover:text-red-500 transition-all duration-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </>
+        ) : (
+          <button className="text-primary font-medium border border-green-400 px-3 py-1 rounded-xl hover:bg-green-400 hover:text-white transition-all duration-200">
+            Message
+          </button>
+        )}
       </div>
     </li>
   );
