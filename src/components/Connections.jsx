@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnection } from "../utils/connetionSlice";
 import axios from "axios";
@@ -7,8 +7,7 @@ import ConnectionCard from "./ConnectionCard";
 const Connections = () => {
   const connections = useSelector((store) => store.connection);
   const dispatch = useDispatch();
-  const [error,setError] = useState(false);
-  
+    
   const getConnections = async () => {
     try {
       const res = await axios.get(
@@ -18,8 +17,7 @@ const Connections = () => {
       dispatch(addConnection(res.data.data));
     } catch (error) {
       console.log(error);
-      setError(true)
-    }
+      }
   };
 
   useEffect(() => {
@@ -60,7 +58,7 @@ const Connections = () => {
 
       <ul className="flex flex-col divide-y divide-gray-200">
         {connections.map((connection) => (
-            <ConnectionCard data={connection}/>          
+            <ConnectionCard key={connection._id} data={connection}/>          
         ))}
       </ul>
     </div>
