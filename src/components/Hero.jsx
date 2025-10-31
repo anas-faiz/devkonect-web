@@ -16,7 +16,7 @@ const Hero = () => {
       </p>
 
       {/* CTA Button */}
-      <Link to={"/login"}>
+      <Link to={"/signup"}>
       <button
         className="mt-8 bg-amber-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-amber-600 hover:shadow-lg active:scale-95 transition-all duration-300"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

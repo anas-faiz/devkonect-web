@@ -104,7 +104,7 @@ const Navbar = () => {
         </div>
       ) : (
         // While loading or logged out
-        <div className="text-sm text-gray-600">DevKonect</div>
+        <div className="text-sm text-gray-600"></div>
       )}
     </nav>
   );

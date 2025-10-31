@@ -11,6 +11,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import Connections from "./components/Connections";
 import Request from "./components/Request";
+import SignUp from "./components/SignUp";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Hero/>}/>
         <Route path="/login" element={<LogIn/>} />
+        <Route path="/signup" element={<SignUp/>} />
         <Route path="/feed" element={<Feed/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/connections" element={<Connections/>}/>
