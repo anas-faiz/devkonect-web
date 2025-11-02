@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { adduser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -11,6 +12,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,11 +35,11 @@ const SignUp = () => {
         { withCredentials: true }
       );
 
-      setMessage({ type: "success", text: "Signup successful!" });
+      setMessage({ type: "success", text: "Signup successful! Redirecting..." });
 
-      // Save user info & redirect
+      // Save user info & redirect after short delay
       dispatch(adduser(response?.data?.data));
-      navigate("/profile");
+      setTimeout(() => navigate("/profile"), 1200);
     } catch (error) {
       const errMsg =
         error.response?.data?.message ||
@@ -49,10 +51,10 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-slate-900 to-slate-700">
+    <div className="flex justify-center items-center bg-linear-to-br from-slate-900 to-slate-700">
       <div className="card w-96 bg-base-200 shadow-2xl">
         <div className="card-body">
-          <h2 className="card-title text-2xl font-semibold mb-4 text-center">
+          <h2 className="card-title text-2xl font-semibold mb-4 text-center text-primary">
             Sign Up
           </h2>
 
@@ -84,19 +86,27 @@ const SignUp = () => {
               required
             />
 
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              minLength={8}
-              onChange={(e) => setPassword(e.target.value)}
-              className="input input-bordered w-full"
-              required
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                minLength={8}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input input-bordered w-full pr-10"
+                required
+              />
+              <span
+                className="absolute right-3 top-3 text-gray-500 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
 
             {message.text && (
               <p
-                className={`text-sm ${
+                className={`text-sm mt-1 text-center ${
                   message.type === "error" ? "text-red-500" : "text-green-500"
                 }`}
               >
