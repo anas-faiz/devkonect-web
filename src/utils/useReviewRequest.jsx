@@ -8,7 +8,7 @@ const useReviewRequest = () => {
   // return a function that can be called from a component
   const reviewRequest = async (status, _id) => {
     try {
-      const res = await axios.post(
+       await axios.post(
         `${import.meta.env.VITE_API_URL}/request/review/${status}/${_id}`,
         {},
         { withCredentials: true }

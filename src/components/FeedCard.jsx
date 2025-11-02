@@ -18,7 +18,7 @@ const FeedCard = ({ feed }) => {
   return (
     <div className="card bg-white/80 backdrop-blur-md w-80 shadow-xl hover:shadow-amber-400/30 transition-all duration-300 border border-white/20 rounded-2xl overflow-hidden">
       {/* Profile Image */}
-      <figure className="relative w-full h-56 overflow-hidden bg-gradient-to-tr from-amber-100/30 to-white/5">
+      <figure className="relative w-full h-56 overflow-hidden bg-linear-to-tr from-amber-100/30 to-white/5">
         <img
           src={feed.photoUrl || "https://via.placeholder.com/150"}
           alt={feed.firstName || "User"}
@@ -67,7 +67,7 @@ const FeedCard = ({ feed }) => {
             </button>
             <button
               onClick={handleRequestSent("interested",feed._id)}
-              className="px-6 py-2 rounded-xl border border-black text-white font-bold uppercase tracking-wide bg-gradient-to-r from-amber-400 to-red-500 hover:from-red-500 hover:to-amber-400 hover:scale-105 active:scale-95 shadow-md transition-all duration-200"
+              className="px-6 py-2 rounded-xl border border-black text-white font-bold uppercase tracking-wide bg-linear-to-r from-amber-400 to-red-500 hover:from-red-500 hover:to-amber-400 hover:scale-105 active:scale-95 shadow-md transition-all duration-200"
             >
               Smash
             </button>
