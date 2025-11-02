@@ -1,13 +1,19 @@
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const FeedCard = ({ feed }) => {
-  const handlePass = async () => {
+  
+  const dispatch = useDispatch();
+
+  const handleRequestSent = async (status,_id) => {
     const res = await axios.post(
       `${import.meta.env.VITE_API_URL}/request/send/rejcted/${feed._id}`,
       {},
       { withCredentials: true }
     );
     console.log(res);
+    dispatch(addFe)
+    
   };
   const handleSmash = async () => {
     const res = await axios.post(
