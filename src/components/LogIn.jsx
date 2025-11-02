@@ -3,12 +3,14 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { adduser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LogIn = () => {
   const [email, setEmail] = useState("wayne@gmail.com");
   const [password, setPassword] = useState("Wayne@123");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
+  const [showPassword , setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,11 +30,11 @@ const LogIn = () => {
         { email, password },
         { withCredentials: true }
       );
-      
+
       setMessage({ type: "success", text: "Login successful!" });
 
       //redirect or save user info here
-      dispatch(adduser(response?.data?.data));      
+      dispatch(adduser(response?.data?.data));
       navigate("/feed");
     } catch (error) {
       const errMsg =
@@ -61,15 +63,23 @@ const LogIn = () => {
               required
             />
 
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              minLength={8}
-              onChange={(e) => setPassword(e.target.value)}
-              className="input input-bordered w-full"
-              required
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                minLength={8}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input input-bordered w-full pr-10"
+                required
+              />
+              <span
+                className="absolute right-3 top-3 text-gray-500 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
 
             {message.text && (
               <p
