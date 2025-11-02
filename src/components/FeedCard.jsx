@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { removeFeed } from "../utils/feedSlice";
 
 const FeedCard = ({ feed }) => {
   
@@ -7,21 +8,11 @@ const FeedCard = ({ feed }) => {
 
   const handleRequestSent = async (status,_id) => {
     const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/request/send/rejcted/${feed._id}`,
+      `${import.meta.env.VITE_API_URL}/request/send/${status}/${_id}`,
       {},
       { withCredentials: true }
     );
-    console.log(res);
-    dispatch(addFe)
-    
-  };
-  const handleSmash = async () => {
-    const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/request/send/interested/${feed._id}`,
-      {},
-      { withCredentials: true }
-    );
-    console.log(res);
+    dispatch(removeFeed(res?.data?.data));    
   };
 
   return (
@@ -69,13 +60,13 @@ const FeedCard = ({ feed }) => {
 
           <div className="flex justify-center gap-4">
             <button
-              onClick={handlePass}
+              onClick={handleRequestSent("rejected",feed._id)}
               className="px-6 py-2 rounded-xl border border-gray-400 text-gray-700 font-semibold uppercase tracking-wide hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all duration-200"
             >
               Pass
             </button>
             <button
-              onClick={handleSmash}
+              onClick={handleRequestSent("interested",feed._id)}
               className="px-6 py-2 rounded-xl border border-black text-white font-bold uppercase tracking-wide bg-gradient-to-r from-amber-400 to-red-500 hover:from-red-500 hover:to-amber-400 hover:scale-105 active:scale-95 shadow-md transition-all duration-200"
             >
               Smash
