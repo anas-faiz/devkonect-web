@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { adduser } from "../utils/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, Links, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LogIn = () => {
@@ -11,6 +11,7 @@ const LogIn = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
   const [showPassword , setShowPassword] = useState(false);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -101,6 +102,7 @@ const LogIn = () => {
               {loading ? "Logging in..." : "Log In"}
             </button>
           </form>
+          <p className="m-auto">new here ? <span className="text-primary hover:underline "> <Link to={"/signup"}>signup</Link></span></p>
         </div>
       </div>
     </div>

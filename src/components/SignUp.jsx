@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { adduser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import {Link} from "react-router-dom"
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -124,6 +125,8 @@ const SignUp = () => {
               {loading ? "Signing up..." : "Sign Up"}
             </button>
           </form>
+          
+          <p className="m-auto">already a user ? <span className="text-primary hover:underline "> <Link to={"/login"}>login</Link></span></p>
         </div>
       </div>
     </div>
