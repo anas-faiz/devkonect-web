@@ -58,6 +58,7 @@ const EditProfileCard = ({ user, onSave }) => {
           about: form.about,
           age: form.age,
           gender: form.gender,
+          photoUrl: form.photoUrl,
         },
         { withCredentials: true }
       );
