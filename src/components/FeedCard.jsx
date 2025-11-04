@@ -1,16 +1,15 @@
 import axios from "axios";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion"
 import { useState } from "react";
 
 const FeedCard = ({ feed, onDone }) => {
-  const [isVisible, setIsVisible] = useState(true);
+  
   const [swipeDirection, setSwipeDirection] = useState(null);
 
   const handleRequestSent = async (status, _id, direction) => {
     try {
       setSwipeDirection(direction);
-      setIsVisible(false); // trigger exit animation
-
+      
       setTimeout(async () => {
         await axios.post(
           `${import.meta.env.VITE_API_URL}/request/send/${status}/${_id}`,
