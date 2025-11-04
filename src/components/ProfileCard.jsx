@@ -22,6 +22,7 @@ const EditProfileCard = ({ user, onSave }) => {
     gender: gender || "",
     about: about || "",
     skills: skills || [],
+    photoUrl: photoUrl || "", 
   });
 
   const [newSkill, setNewSkill] = useState("");
@@ -92,7 +93,7 @@ const EditProfileCard = ({ user, onSave }) => {
         {/* Profile Info */}
         <div className="card-body text-center lg:text-left space-y-4">
           {/* Name Fields */}
-          {isEditing ? (
+          {isEditing ? (<>
             <div className="flex flex-col lg:flex-row gap-2">
               <input
                 type="text"
@@ -111,6 +112,18 @@ const EditProfileCard = ({ user, onSave }) => {
                 className="input input-bordered w-full"
               />
             </div>
+            <div>
+              <input
+                type="text"
+                name="photoUrl"
+                value={form.photoUrl}
+                onChange={handleChange}
+                placeholder="photo Url"
+                className="input input-bordered w-full"
+              />
+            </div>
+            </>
+            
           ) : (
             <h2 className="text-3xl font-bold text-amber-700 capitalize">
               {form.firstName} {form.lastName}
