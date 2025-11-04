@@ -13,6 +13,7 @@ const EditProfileCard = ({ user, onSave }) => {
     photoUrl,
     skills = [],
   } = user || {};
+
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({
@@ -22,33 +23,34 @@ const EditProfileCard = ({ user, onSave }) => {
     gender: gender || "",
     about: about || "",
     skills: skills || [],
-    photoUrl: photoUrl || "", 
+    photoUrl: photoUrl || "",
   });
 
   const [newSkill, setNewSkill] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  const [toast, setToast] = useState(false);
-  const [error,setError] = useState(false);
+  const [toast, setToast] = useState(null); // 'success' | 'error'
+  const [loading, setLoading] = useState(false);
+
+  // -----------------
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
   const handleAddSkill = () => {
-    if (newSkill.trim() && !form.skills.includes(newSkill)) {
+    if (newSkill.trim() && !form.skills.includes(newSkill.trim())) {
       setForm({ ...form, skills: [...form.skills, newSkill.trim()] });
       setNewSkill("");
     }
   };
 
   const handleRemoveSkill = (skill) => {
-    setForm({
-      ...form,
-      skills: form.skills.filter((s) => s !== skill),
-    });
+    setForm({ ...form, skills: form.skills.filter((s) => s !== skill) });
   };
+
   const handleSave = async () => {
     try {
+      setLoading(true);
       const res = await axios.patch(
         `${import.meta.env.VITE_API_URL}/profile/edit`,
         {
@@ -65,27 +67,26 @@ const EditProfileCard = ({ user, onSave }) => {
 
       dispatch(adduser(res.data));
       if (onSave) onSave(form);
+
+      setToast("success");
       setIsEditing(false);
-      setToast(true);
-      setTimeout(() => {
-        setToast(false);
-      }, 3000);
     } catch (err) {
-      console.error(err);
-      setError(true);
-      setTimeout(()=>{
-        setError(false)
-      },[3000])
+      console.error("Profile update failed:", err);
+      setToast("error");
+    } finally {
+      setLoading(false);
+      setTimeout(() => setToast(null), 3000);
     }
   };
 
+  // -----------------
   return (
     <>
       <div className="card lg:card-side bg-white/10 backdrop-blur-md shadow-lg hover:shadow-amber-400/40 transition-all duration-300 border border-white/20 rounded-2xl overflow-hidden max-w-4xl mx-auto p-6">
         {/* Profile Image */}
         <figure className="flex justify-center items-center w-full lg:w-1/3 bg-gradient-to-tr from-amber-200/30 to-transparent p-4">
           <img
-            src={photoUrl || "https://via.placeholder.com/200"}
+            src={form.photoUrl || "https://via.placeholder.com/200"}
             alt={`${form.firstName || "User"} ${form.lastName || ""}`}
             className="w-40 h-40 object-cover rounded-full border-4 border-amber-400 shadow-md"
           />
@@ -94,37 +95,37 @@ const EditProfileCard = ({ user, onSave }) => {
         {/* Profile Info */}
         <div className="card-body text-center lg:text-left space-y-4">
           {/* Name Fields */}
-          {isEditing ? (<>
-            <div className="flex flex-col lg:flex-row gap-2">
-              <input
-                type="text"
-                name="firstName"
-                value={form.firstName}
-                onChange={handleChange}
-                placeholder="First Name"
-                className="input input-bordered w-full"
-              />
-              <input
-                type="text"
-                name="lastName"
-                value={form.lastName}
-                onChange={handleChange}
-                placeholder="Last Name"
-                className="input input-bordered w-full"
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name="photoUrl"
-                value={form.photoUrl}
-                onChange={handleChange}
-                placeholder="photo Url"
-                className="input input-bordered w-full"
-              />
-            </div>
+          {isEditing ? (
+            <>
+              <div className="flex flex-col lg:flex-row gap-2">
+                <input
+                  type="text"
+                  name="firstName"
+                  value={form.firstName}
+                  onChange={handleChange}
+                  placeholder="First Name"
+                  className="input input-bordered w-full"
+                />
+                <input
+                  type="text"
+                  name="lastName"
+                  value={form.lastName}
+                  onChange={handleChange}
+                  placeholder="Last Name"
+                  className="input input-bordered w-full"
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="photoUrl"
+                  value={form.photoUrl}
+                  onChange={handleChange}
+                  placeholder="Photo URL"
+                  className="input input-bordered w-full"
+                />
+              </div>
             </>
-            
           ) : (
             <h2 className="text-3xl font-bold text-amber-700 capitalize">
               {form.firstName} {form.lastName}
@@ -142,22 +143,20 @@ const EditProfileCard = ({ user, onSave }) => {
                 placeholder="Age"
                 className="input input-bordered w-full"
               />
-              {!form.gender && (
-                <select
-                  name="gender"
-                  value={form.gender}
-                  onChange={handleChange}
-                  className="select select-bordered w-full"
-                >
-                  <option value="">Select Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
-              )}
+              <select
+                name="gender"
+                value={form.gender}
+                onChange={handleChange}
+                className="select select-bordered w-full"
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           ) : (
-            <p className=" text-sm font-medium">
+            <p className="text-sm font-medium">
               {form.age && `${form.age} years old`}{" "}
               {form.gender && `• ${form.gender}`}
             </p>
@@ -230,9 +229,14 @@ const EditProfileCard = ({ user, onSave }) => {
               <>
                 <button
                   onClick={handleSave}
-                  className="btn btn-sm bg-amber-500 text-white hover:bg-amber-600"
+                  disabled={loading}
+                  className={`btn btn-sm ${
+                    loading
+                      ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                      : "bg-amber-500 text-white hover:bg-amber-600"
+                  }`}
                 >
-                  Save
+                  {loading ? "Saving..." : "Save"}
                 </button>
                 <button
                   onClick={() => setIsEditing(false)}
@@ -252,18 +256,23 @@ const EditProfileCard = ({ user, onSave }) => {
           </div>
         </div>
       </div>
-      
-        {toast && <div className="toast toast-top toast-end fixed top-20">
+
+      {/* Toast Notifications */}
+      {toast === "success" && (
+        <div className="toast toast-top toast-end fixed top-20">
           <div className="alert alert-success">
-            <span>Profile Updated successfully.</span>
+            <span>Profile updated successfully ✅</span>
           </div>
-        </div>}
-        {error && <div className="toast toast-top toast-end fixed top-20">
-          <div className="alert alert-fail">
-            <span>failed to update Profile</span>
+        </div>
+      )}
+
+      {toast === "error" && (
+        <div className="toast toast-top toast-end fixed top-20">
+          <div className="alert alert-error">
+            <span>Failed to update profile ❌</span>
           </div>
-        </div>}
-          
+        </div>
+      )}
     </>
   );
 };
