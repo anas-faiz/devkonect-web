@@ -92,7 +92,7 @@ DevKonnect is designed using a **Microservices-based MERN Architecture**:
 | **Vite** | Lightning-fast development and build tool |
 | **Tailwind CSS** | Utility-first CSS framework for clean, responsive design |
 | **Axios** | HTTP client for REST API communication |
-| **Context API** | Lightweight state management |
+| **Redux** | state management |
 
 ---
 
@@ -104,10 +104,7 @@ devkonect-web/
 ├── public/                 # Static assets
 ├── src/
 │   ├── components/         # Reusable UI components
-│   ├── pages/              # Page-level views
-│   ├── hooks/              # Custom React hooks
-│   ├── services/           # API interaction layer (Axios)
-│   ├── context/            # Global state management
+│   ├── utlis/              # cutomHooks, ReduxStore
 │   └── App.jsx
 │
 ├── package.json
@@ -159,7 +156,7 @@ Frontend (React)  →  /api/connections/send    →  Backend (Connection Microse
 
 **Anas Faiz**  
 *MERN Stack Developer | Microservices Enthusiast*  
-📧 [anasfaiz.dev@gmail.com](mailto:anasfaiz0811@gmail.com)  
+📧 [anasfaiz0811@gmail.com](mailto:anasfaiz0811@gmail.com)  
 🌐 [GitHub Profile](https://github.com/anas-faiz)  
 
 ---
