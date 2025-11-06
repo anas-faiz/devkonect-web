@@ -26,7 +26,7 @@ DevKonnect follows a **Microservice Architecture**, where the **Frontend** and *
 | **Backend (separate repo)** | Node.js, Express.js, MongoDB | Manages authentication, user profiles, connections, and feed APIs. |
 
 ### ⚙️ Architecture Diagram
-![Architecture Diagram](./A_2D_digital_diagram_illustrates_a_microservices-b.png)
+![Architecture Diagram](https://chatgpt.com/backend-api/estuary/content?id=file_000000007dbc720688c32cff5394ebf8&ts=489558&p=fs&cid=1&sig=b3be91049c7dc05e09a493a6207b35be486bc06068bc8d3170c63b40945c9290&v=0)
 
 This separation ensures **scalability**, **independent deployment**, and **modular updates**, following modern **microservice design principles**.
 
