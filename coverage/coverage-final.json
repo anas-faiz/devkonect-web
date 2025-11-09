@@ -1,0 +1,2 @@
+{"C:\\Users\\FAIZ\\fullstack_project\\devkonect-web\\src\\components\\sum.js": {"path":"C:\\Users\\FAIZ\\fullstack_project\\devkonect-web\\src\\components\\sum.js","statementMap":{"0":{"start":{"line":3,"column":4},"end":{"line":3,"column":null}}},"fnMap":{"0":{"name":"sum","decl":{"start":{"line":2,"column":16},"end":{"line":2,"column":19}},"loc":{"start":{"line":2,"column":25},"end":{"line":4,"column":null}},"line":2}},"branchMap":{},"s":{"0":1},"f":{"0":1},"b":{},"meta":{"lastBranch":0,"lastFunction":1,"lastStatement":1,"seen":{"f:2:16:2:19":0,"s:3:4:3:Infinity":0}}}
+}
