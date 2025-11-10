@@ -12,9 +12,26 @@ export default defineConfig({
     }),tailwindcss()
   ],
    test: {
-    environment: 'jsdom', 
-    globals: true,         
+    // 🔹 Basic setup
+    globals: true,
+    environment: 'jsdom',
     setupFiles: './src/setupTests.js',
-    threads: false
+
+    // 🔹 Stability settings (Windows-safe)
+    threads: false,          // Disable worker_threads completely
+    pool: 'forks',           // Use child process pool instead
+    isolate: false,          // Prevents re-isolation per test file (faster + safer on Windows)
+
+    // 🔹 Timeout & performance
+    testTimeout: 20000,      // 20s per test (avoid slow jsdom startup)
+    hookTimeout: 20000,
+    teardownTimeout: 20000,
+
+    // 🔹 Pool options
+    poolOptions: {
+      forks: {
+        singleFork: true,    // Run all tests in a single process
+      },
+    },
   },
 })
