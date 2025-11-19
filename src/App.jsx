@@ -16,40 +16,43 @@ import SignUp from "./components/SignUp";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userData = useSelector((store) => store.user)
-  
-  const fetchData = async ()=>{
-    try{
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/profile/view`, {
-        withCredentials:true,
-      });
+  const userData = useSelector((store) => store.user);
+
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/profile/view`,
+        {
+          withCredentials: true,
+        }
+      );
       dispatch(adduser(res?.data?.data));
-    }catch(err){
-      if(err.status == 401){
-        navigate("/login")
-      }      
-      console.error("error : " + err.message)
-    }    
-  }
-  useEffect(()=>{
-    if(!userData){
-    fetchData();
+    } catch (err) {
+      if (err.status == 401) {
+        navigate("/login");
+      }
+      console.error("error : " + err.message);
     }
-  },[])
+  };
+  useEffect(() => {
+    if (!userData) {
+      fetchData();
+    }
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full ">
-      <Navbar/>
+      <Navbar />
       <Routes>
-        <Route path='/' element={<Hero/>}/>
-        <Route path="/login" element={<LogIn/>} />
-        <Route path="/signup" element={<SignUp/>} />
-        <Route path="/feed" element={<Feed/>}/>
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/connections" element={<Connections/>}/>
-        <Route path="/request" element={<Request/>}/>
+        <Route path="/" element={<Hero />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/connections" element={<Connections />} />
+        <Route path="/request" element={<Request />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
