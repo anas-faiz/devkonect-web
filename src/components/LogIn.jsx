@@ -6,8 +6,8 @@ import { Link, Links, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LogIn = () => {
-  const [email, setEmail] = useState("wayne@gmail.com");
-  const [password, setPassword] = useState("Wayne@123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
   const [showPassword , setShowPassword] = useState(false);
