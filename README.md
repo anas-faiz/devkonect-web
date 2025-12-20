@@ -9,6 +9,8 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
 ---
+**CHECK OUT**  🌐 [DevKonect](https://devkonect.live/)
+**BackEnd**  🌐 [DevKonect-backend](https://github.com/anas-faiz/devKonect)
 
 **DevKonnect** is a **Microservices-based MERN application** that enables developers to network, collaborate, and share ideas through interactive profiles, feeds, and connection requests — similar to a developer-centric LinkedIn.
 
