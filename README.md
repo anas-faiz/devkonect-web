@@ -10,7 +10,6 @@
 
 ---
 **CHECK OUT**  🌐 [DevKonect](https://devkonect.live/)
-**BackEnd**  🌐 [DevKonect-backend](https://github.com/anas-faiz/devKonect)
 
 **DevKonnect** is a **Microservices-based MERN application** that enables developers to network, collaborate, and share ideas through interactive profiles, feeds, and connection requests — similar to a developer-centric LinkedIn.
 
