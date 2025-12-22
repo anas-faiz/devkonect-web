@@ -66,6 +66,7 @@ const EditProfileCard = ({ user, onSave }) => {
       );
 
       dispatch(adduser(res.data));
+
       if (onSave) onSave(form);
 
       setToast("success");
@@ -84,7 +85,7 @@ const EditProfileCard = ({ user, onSave }) => {
     <>
       <div className="card lg:card-side bg-white/10 backdrop-blur-md shadow-lg hover:shadow-amber-400/40 transition-all duration-300 border border-white/20 rounded-2xl overflow-hidden max-w-4xl mx-auto p-6">
         {/* Profile Image */}
-        <figure className="flex justify-center items-center w-full lg:w-1/3 bg-gradient-to-tr from-amber-200/30 to-transparent p-4">
+        <figure className="flex justify-center items-center w-full lg:w-1/3 from-amber-200/30 to-transparent p-4">
           <img
             src={form.photoUrl || "https://via.placeholder.com/200"}
             alt={`${form.firstName || "User"} ${form.lastName || ""}`}

@@ -28,7 +28,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar bg-base-300 shadow-sm fixed top-0 z-50 px-4">
+    <nav className="navbar bg-base-300 shadow-sm sticky top-0 z-50 px-4">
+
       {/* Left Section */}
       <div className="flex-1">
         <Link

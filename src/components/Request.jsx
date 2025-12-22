@@ -29,7 +29,7 @@ const Request = () => {
 
   if (request.length === 0) {
     return (
-      <div className="flex justify-center items-center h-screen text-lg text-gray-400">
+      <div className="flex justify-center items-center pt-36 text-lg text-gray-400">
         No requests yet 🕊️
       </div>
     );

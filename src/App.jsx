@@ -28,9 +28,10 @@ function App() {
       );
       dispatch(adduser(res?.data?.data));
     } catch (err) {
-      if (err.status == 401) {
+      if (err.response?.status === 401) {
         navigate("/login");
       }
+
       console.error("error : " + err.message);
     }
   };
@@ -41,17 +42,24 @@ function App() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-full ">
+    <div className="min-h-screen flex flex-col w-full">
+      {/* Navbar */}
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Hero />} />
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/feed" element={<Feed />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/connections" element={<Connections />} />
-        <Route path="/request" element={<Request />} />
-      </Routes>
+
+      {/* Main content */}
+      <main className="flex-1 w-full">
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/connections" element={<Connections />} />
+          <Route path="/request" element={<Request />} />
+        </Routes>
+      </main>
+
+      {/* Footer */}
       <Footer />
     </div>
   );

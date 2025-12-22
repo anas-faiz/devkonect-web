@@ -15,7 +15,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center pt-8 justify-center">
       <ProfileCard user= {user}/>
     </div>
   );

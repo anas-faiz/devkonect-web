@@ -1,8 +1,14 @@
+import { useSelector } from "react-redux";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
+  const user = useSelector((state) => state.user);
   return (
-    <footer className="footer bg-neutral text-neutral-content p-4 sm:footer-horizontal flex flex-wrap justify-between items-center fixed bottom-0 w-full shadow-inner z-40">
+    <footer
+      className={`bg-neutral text-neutral-content sticky p-4 w-full ${
+        user ? "mt-4" : "mt-0"
+      }`}
+    >
       {/* Left Section */}
       <div className="flex items-center gap-2">
         <svg

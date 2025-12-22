@@ -52,7 +52,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center items-center bg-linear-to-br from-slate-900 to-slate-700">
+    <div className="flex pt-16 pb-10 justify-center items-center bg-linear-to-br from-slate-900 to-slate-700">
       <div className="card w-96 bg-base-200 shadow-2xl">
         <div className="card-body">
           <h2 className="card-title text-2xl font-semibold mb-4 text-center text-primary">

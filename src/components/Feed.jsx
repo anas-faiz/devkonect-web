@@ -60,8 +60,8 @@ const Feed = () => {
   // ✅ No users left
   if (!feeds || feeds.length === 0 || currentIndex >= feeds.length) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen text-center">
-        <h2 className="text-2xl font-semibold text-primary">
+      <div className="flex flex-col items-center justify-center mt-32 text-center">
+        <h2 className="text-2xl font-semibold text-primary ">
           No more users found 💫
         </h2>
       </div>
@@ -75,7 +75,7 @@ const Feed = () => {
   const currentFeed = feeds[currentIndex];
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center pt-4">
       <AnimatePresence mode="wait">
         <FeedCard
           key={currentFeed._id}

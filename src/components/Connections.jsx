@@ -34,7 +34,7 @@ const Connections = () => {
 
   if (connections.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center">
         <img
           src="https://cdn-icons-png.flaticon.com/512/620/620851.png"
           alt="No connections"
