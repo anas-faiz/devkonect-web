@@ -43,7 +43,7 @@ const SignUp = () => {
       setTimeout(() => navigate("/profile"), 1200);
     } catch (error) {
       const errMsg =
-        error.response?.data?.message ||
+        error.response?.data ||
         "Something went wrong. Please try again.";
       setMessage({ type: "error", text: errMsg });
     } finally {

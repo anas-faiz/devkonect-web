@@ -39,7 +39,7 @@ const LogIn = () => {
       navigate("/feed");
     } catch (error) {
       const errMsg =
-        error.response?.data?.message || "Invalid credentials. Try again.";
+        error.response?.data || "Invalid credentials. Try again.";
       setMessage({ type: "error", text: errMsg });
     } finally {
       setLoading(false);
