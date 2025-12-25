@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import Connections from "./components/Connections";
 import Request from "./components/Request";
 import SignUp from "./components/SignUp";
+import Chat from "./components/Chat"
 
 function App() {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/connections" element={<Connections />} />
           <Route path="/request" element={<Request />} />
+          <Route path="/chat" element={<Chat />}/>
         </Routes>
       </main>
 
