@@ -46,7 +46,6 @@ function App() {
     <div className="min-h-screen flex flex-col w-full">
       {/* Navbar */}
       <Navbar />
-
       {/* Main content */}
       <main className="flex-1 w-full">
         <Routes>
@@ -57,10 +56,9 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/connections" element={<Connections />} />
           <Route path="/request" element={<Request />} />
-          <Route path="/chat" element={<Chat />}/>
+          <Route path="/chat/:targetUserId" element={<Chat />}/>
         </Routes>
       </main>
-
       {/* Footer */}
       <Footer />
     </div>

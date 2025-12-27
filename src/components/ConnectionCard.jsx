@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import useReviewRequest from "../utils/useReviewRequest";
+import {Link} from "react-router-dom"
 
 const ConnectionCard = ({ data ,requestId}) => {
   const connections = useSelector((store) => store.connection);
@@ -63,9 +64,11 @@ const ConnectionCard = ({ data ,requestId}) => {
             </button>
           </>
         ) : (
-          <button className="text-primary font-medium border border-green-400 px-3 py-1 rounded-xl hover:bg-green-400 hover:text-white transition-all duration-200">
+          <Link to={"/chat/"+data._id}>
+            <button className="text-primary font-medium border border-green-400 px-3 py-1 rounded-xl hover:bg-green-400 hover:text-white transition-all duration-200">
             Message
           </button>
+          </Link>
         )}
       </div>
     </li>
