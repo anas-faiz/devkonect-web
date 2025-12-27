@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer
       className={`bg-neutral text-neutral-content sticky p-4 w-full ${
-        user ? "mt-4" : "mt-0"
+        user ? "mt-0" : "mt-0"
       }`}
     >
       {/* Left Section */}
