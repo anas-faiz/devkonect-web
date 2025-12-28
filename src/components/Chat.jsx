@@ -1,16 +1,29 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { createSocketConnection } from "../utils/socket";
+import { useSelector } from "react-redux";
 
 const Chat = () => {
   const { targetUserId } = useParams();
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
+  const user = useSelector((store)=>store.user)
+  const userid = user?._id
   const bottomRef = useRef(null);
+
+  useEffect(()=>{
+    const socket = createSocketConnection()
+
+    socket.emit("joinChat",{userid,targetUserId})
+  },[])
+  
+
 
   // Auto-scroll on new message
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
 
   const handleSend = () => {
     if (!text.trim()) return;
@@ -66,8 +79,7 @@ const Chat = () => {
         />
         <button
           onClick={handleSend}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
+          className="bg-blue-600 text-white px-4 py-2 rounded">
           Send
         </button>
       </div>
