@@ -15,6 +15,10 @@ const Chat = () => {
     const socket = createSocketConnection()
 
     socket.emit("joinChat",{userid,targetUserId})
+
+    return ()=>{
+      socket.disconnect();
+    }
   },[])
   
 
