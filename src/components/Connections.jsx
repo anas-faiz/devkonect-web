@@ -51,7 +51,7 @@ const Connections = () => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 bg-white/80 backdrop-blur-md shadow-lg rounded-2xl border border-white/20 p-4">
+    <div className="max-w-2xl mx-auto mt-10 mb-4 bg-white/80 backdrop-blur-md shadow-lg rounded-2xl border border-white/20 p-4">
       <h1 className="text-xl font-bold text-primary mb-4 tracking-wide">
         Connections ({connections.length})
       </h1>

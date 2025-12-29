@@ -11,16 +11,18 @@ const Chat = () => {
   const userid = user?._id
   const bottomRef = useRef(null);
 
+  
   useEffect(()=>{
     const socket = createSocketConnection()
+
+    if(!userid) return
 
     socket.emit("joinChat",{userid,targetUserId})
 
     return ()=>{
       socket.disconnect();
     }
-  },[])
-  
+  },[userid,targetUserId])
 
 
   // Auto-scroll on new message
@@ -30,11 +32,14 @@ const Chat = () => {
 
 
   const handleSend = () => {
+    
     if (!text.trim()) return;
+
+    const socket = createSocketConnection()
 
     const newMessage = {
       id: Date.now(),
-      sender: "me",
+      sender: userid,
       receiver: targetUserId,
       message: text,
       createdAt: new Date().toISOString(),
@@ -43,9 +48,9 @@ const Chat = () => {
     setMessages((prev) => [...prev, newMessage]);
     setText("");
 
-    // 🔗 Later connect here:
-    // socket.emit("send-message", newMessage)
-    // and POST /api/messages
+    // 🔗connection logic here:
+   socket.emit("sendMessage", newMessage)
+    // POST /api/messages
   };
 
   return (
