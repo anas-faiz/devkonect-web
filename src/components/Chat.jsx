@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Chat = () => {
   const { targetUserId } = useParams();
@@ -18,13 +19,51 @@ const Chat = () => {
   const bottomRef = useRef(null);
 
   useEffect(() => {
+    if (!targetUserId) return;
+
+    const fetchChat = async () => {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/chat/${targetUserId}`,
+          { withCredentials: true }
+        );
+
+        const normalized = res.data.messages.map((msg) => ({
+          id: msg._id,
+          senderId: msg.senderId._id,
+          senderName: `${msg.senderId.firstName} ${msg.senderId.lastName}`,
+          message: msg.message,
+          createdAt: msg.createdAt,
+        }));
+
+        setMessages(normalized);
+      } catch (err) {
+        console.error("Failed to fetch chat", err);
+      }
+    };
+
+    fetchChat();
+  }, [targetUserId]);
+
+  useEffect(() => {
     if (!userId || !targetUserId) return;
 
     socketRef.current = createSocketConnection();
     socketRef.current.emit("joinChat", { userId, targetUserId });
 
     const handleMessage = (msg) => {
-      setMessages((prev) => [...prev, msg]);
+      const normalized = {
+        id: msg._id || Date.now(),
+        senderId: msg.sender,
+        senderName:
+          msg.sender === userId
+            ? "You"
+            : `${targetUser.firstName} ${targetUser.lastName}`,
+        message: msg.message,
+        createdAt: msg.createdAt,
+      };
+
+      setMessages((prev) => [...prev, normalized]);
     };
 
     socketRef.current.on("messageReceived", handleMessage);
@@ -33,7 +72,7 @@ const Chat = () => {
       socketRef.current.off("messageReceived", handleMessage);
       socketRef.current.disconnect();
     };
-  }, [userId, targetUserId]);
+  }, [userId, targetUserId, targetUser]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -67,33 +106,38 @@ const Chat = () => {
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
-          {messages.map((msg, index) => {
-            const isMe = String(msg.sender) === String(userId);
+          {messages.map((msg) => {
+            const isMe = String(msg.senderId) === String(userId);
 
             return (
               <div
-                key={index}
+                key={msg.id}
                 className={`flex ${isMe ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[75%] px-4 py-2 rounded-lg text-sm wrap-break-word
-                    ${
-                      isMe
-                        ? "bg-blue-600 text-white rounded-br-none"
-                        : "bg-white text-black rounded-bl-none"
-                    }`}
+                  className={`max-w-[75%] px-4 py-2 rounded-lg text-sm break-words
+          ${
+            isMe
+              ? "bg-blue-600 text-white rounded-br-none"
+              : "bg-white text-black rounded-bl-none"
+          }`}
                 >
                   <p>{msg.message}</p>
-                  <p className="text-[10px] opacity-70 text-right mt-1">
-                    {new Date(msg.createdAt).toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </p>
+
+                  <div className="flex justify-between gap-2 mt-1 text-[10px] opacity-70">
+                    {!isMe && <span>{msg.senderName}</span>}
+                    <span>
+                      {new Date(msg.createdAt).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
+                  </div>
                 </div>
               </div>
             );
           })}
+
           <div ref={bottomRef} />
         </div>
 
