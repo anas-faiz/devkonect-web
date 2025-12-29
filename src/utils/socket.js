@@ -1,5 +1,9 @@
-import io from "socket.io-client"
+import { io } from "socket.io-client";
 
-export const createSocketConnection = ()=>{
-    return io(import.meta.env.VITE_API_URL)
-}
+export const createSocketConnection = () => {
+  return io("/", {
+  path: "/api/socket.io",
+  withCredentials: true,
+});
+
+};
