@@ -9,9 +9,8 @@ const Chat = () => {
   const [text, setText] = useState("");
 
   const user = useSelector((store) => store.user);
-  const connection = useSelector((store)=>store.connection)
-  const targetUser = connection?.find(
-  (user) => user._id === targetUserId);
+  const connection = useSelector((store) => store.connection);
+  const targetUser = connection?.find((user) => user._id === targetUserId);
 
   const userId = user?._id;
 
@@ -56,16 +55,20 @@ const Chat = () => {
   return (
     <div className="h-screen bg-gray-700 flex items-center justify-center">
       <div className="flex flex-col w-full h-full sm:h-[90vh] sm:max-w-3xl bg-gray-600 sm:rounded-lg shadow-lg">
-
         {/* Header */}
         <div className="p-4 bg-gray-800 text-white font-semibold sticky top-0">
-          Chat with <span className="text-purple-400 uppercase font-bold text-lg">{targetUser?.firstName + " "+ targetUser?.lastName || "loading....."}</span>
+          Chat with{" "}
+          <span className="text-purple-400 uppercase font-bold text-lg">
+            {targetUser
+              ? `${targetUser.firstName} ${targetUser.lastName}`
+              : "Loading..."}
+          </span>
         </div>
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           {messages.map((msg, index) => {
-            const isMe = msg.sender === userId;
+            const isMe = String(msg.sender) === String(userId);
 
             return (
               <div
@@ -110,7 +113,6 @@ const Chat = () => {
             Send
           </button>
         </div>
-
       </div>
     </div>
   );
