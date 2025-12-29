@@ -59,7 +59,7 @@ const Chat = () => {
 
         {/* Header */}
         <div className="p-4 bg-gray-800 text-white font-semibold sticky top-0">
-          Chat with {targetUser?.firstName || "loading....."}
+          Chat with <span className="text-purple-400 uppercase font-bold text-lg">{targetUser?.firstName + " "+ targetUser?.lastName || "loading....."}</span>
         </div>
 
         {/* Messages */}
@@ -73,7 +73,7 @@ const Chat = () => {
                 className={`flex ${isMe ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[75%] px-4 py-2 rounded-lg text-sm break-words
+                  className={`max-w-[75%] px-4 py-2 rounded-lg text-sm wrap-break-word
                     ${
                       isMe
                         ? "bg-blue-600 text-white rounded-br-none"
