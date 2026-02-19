@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { adduser } from "../utils/userSlice";
 import { Link, Links, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import GuestLogin from "./GuestLogin";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -102,6 +103,7 @@ const LogIn = () => {
               {loading ? "Logging in..." : "Log In"}
             </button>
           </form>
+              <GuestLogin loading={loading}/>
           <p className="m-auto">new here ? <span className="text-primary hover:underline "> <Link to={"/signup"}>signup</Link></span></p>
         </div>
       </div>
