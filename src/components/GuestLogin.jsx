@@ -3,13 +3,14 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { adduser } from "../utils/userSlice";
 
-const GuestLogin = ({loading})=>{
+const GuestLogin = ({loading,setLoading})=>{
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
    const handleLogin = async ()=>{
 
+    setLoading(true)
         const response = await axios.post(
                 `${import.meta.env.VITE_API_URL}/login`,
                 { email : import.meta.env.VITE_guest_email, 

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { adduser } from "../utils/userSlice";
-import { Link, Links, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import GuestLogin from "./GuestLogin";
 
@@ -103,7 +103,7 @@ const LogIn = () => {
               {loading ? "Logging in..." : "Log In"}
             </button>
           </form>
-              <GuestLogin loading={loading}/>
+              <GuestLogin loading={loading} setLoading={setLoading} />
           <p className="m-auto">new here ? <span className="text-primary hover:underline "> <Link to={"/signup"}>signup</Link></span></p>
         </div>
       </div>
