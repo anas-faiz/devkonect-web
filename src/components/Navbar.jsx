@@ -7,28 +7,34 @@ import { useState } from "react";
 const Navbar = () => {
   const user = useSelector((state) => state.user);
   const request = useSelector((state) => state.request);
+
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    try {
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/logout`,
-        {},
-        { withCredentials: true }
-      );
+  try {
+    setLoading(true);
+    await axios.post(
+      `${import.meta.env.VITE_API_URL}/logout`,
+      {},
+      { withCredentials: true }
+    );
 
-      dispatch(removeUser());
-      navigate("/login", { replace: true });
-    } catch (err) {
-      console.error("Error logging out:", err);
-      setError(true);
-    }
-  };
+    dispatch(removeUser());
+    navigate("/login", { replace: true });
+  } catch (err) {
+    console.error("Error logging out:", err);
+    setError(true);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
-    <nav className="navbar bg-base-300 shadow-sm sticky top-0 z-50 px-4">
+    <div>
+      <nav className="navbar bg-base-300 shadow-sm sticky top-0 z-50 px-4">
 
       {/* Left Section */}
       <div className="flex-1">
@@ -51,9 +57,9 @@ const Navbar = () => {
 
             {/* Only show count if request exists */}
             {Array.isArray(request) && request.length > 0 && (
-              <span className="absolute -top-2 -right-2 bg-rose-500 text-white text-xs font-semibold rounded-full px-2 py-0.5 shadow-md">
+              <span className="badge badge-error badge-sm absolute -top-2 -right-2">
                 {request.length}
-              </span>
+                </span>
             )}
           </div>
 
@@ -94,10 +100,10 @@ const Navbar = () => {
               </li>
               <li>
                 <button
-                  onClick={handleLogout}
-                  className="text-error hover:bg-error/10"
-                >
-                  Logout
+                onClick={handleLogout}
+                  disabled={loading}
+                  className="text-error hover:bg-error/10">
+                  {loading ? "Logging out..." : "Logout"}
                 </button>
               </li>
             </ul>
@@ -108,6 +114,12 @@ const Navbar = () => {
         <div className="text-sm text-gray-600"></div>
       )}
     </nav>
+    {error && (
+      <div className="alert alert-error rounded-none">
+        Logout failed. Please try again.
+      </div>
+      )}
+    </div>
   );
 };
 
