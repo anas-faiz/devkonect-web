@@ -1,0 +1,17 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="110" fill="#020617"></rect>
+
+  <!-- Left Bracket -->
+  <path d="M200 170 
+           Q150 256 200 342" stroke="#38BDF8" stroke-width="40" stroke-linecap="round" fill="none"></path>
+
+  <!-- Right Bracket -->
+  <path d="M312 170 
+           Q362 256 312 342" stroke="#38BDF8" stroke-width="40" stroke-linecap="round" fill="none"></path>
+
+  <!-- Connection Node -->
+  <circle cx="256" cy="256" r="28" fill="#38BDF8"></circle>
+
+</svg>
